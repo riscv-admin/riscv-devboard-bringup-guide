@@ -1,11 +1,12 @@
-RISC-V Getting Started Guide
+RISC-V DevBoard Bringup Guide
 ============================
 
-This is the repository for the `RISC-V Getting Started Guide <http://risc-v-getting-started-guide.readthedocs.io/>`_, an introductory material prepared by the RISC-V Foundation and hosted at Read The Docs to show you where to start if you're interested in developing for the free and open source ISA.
+This is the repository for the `RISC-V Developer Board Bringup Guide (TBD URL), an introductory material prepared by RISC-V International.  
+It was forked from a legacy project (archived) `The RISC-V Getting Started Guide <https://github.com/riscvarchive/risc-v-getting-started-guide>`_
 
 For details about RISC-V itself, see the `RISC-V Website <https://riscv.org>`_.
 
-You can contribute to the Getting Started Guide too!
+You can contribute to the Bringup Guide too!
 We are always happy to add more platforms and examples, and make the Guide more attractive to readers.
 See `Contributing`_ below for details.
 
