@@ -1,8 +1,8 @@
 RISC-V DevBoard Bringup Guide
 ============================
 
-This is the repository for the `RISC-V Developer Board Bringup Guide (TBD URL), an introductory material prepared by RISC-V International.  
-It was forked from a legacy project (archived) `The RISC-V Getting Started Guide <https://github.com/riscvarchive/risc-v-getting-started-guide>`_
+This is the source repository for the `RISC-V Developer Board Bringup Guide <https://riscv-admin.github.io/riscv-devboard-bringup-guide/>`_, an introductory material prepared by RISC-V International.  
+It was forked from a legacy project (archived) `The RISC-V Getting Started Guide <https://github.com/riscvarchive/risc-v-getting-started-guide>`_.
 
 For details about RISC-V itself, see the `RISC-V Website <https://riscv.org>`_.
 
@@ -21,11 +21,11 @@ Sphinx can be installed with ``pip``, the Python package manager::
 
 (for detailed instructions, see `Installing Sphinx <http://www.sphinx-doc.org/en/master/usage/installation.html>`_)
 
-To compile the HTML version of the Guide, use::
+To compile the HTML version of the Guide locally, clone the repo and from the top direcotry build using::
 
     make html
 
-The output will reside in the ``build/`` directory.
+The output will reside in the ``docs/html/`` directory.
 
 You can also generate a PDF, which requires TeX and a few other tools.
 
