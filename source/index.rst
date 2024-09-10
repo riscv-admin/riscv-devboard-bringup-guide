@@ -9,6 +9,12 @@
    introduction
 
 .. toctree::
+   :caption: BareMetal
+   :maxdepth: 1
+
+   baremetal
+
+.. toctree::
    :caption: Zephyr
    :maxdepth: 2
 
