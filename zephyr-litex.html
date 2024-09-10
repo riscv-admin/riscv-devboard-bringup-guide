@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running Zephyr on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA &mdash; RISC-V - DevBoard Bringup Guide</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/risc-v.css?v=5d3f3da0" />
+      <link rel="stylesheet" type="text/css" href="_static/css/risc-v.css?v=5d3f3da0" />
+
+  
+    <link rel="shortcut icon" href="_static/riscv-favicon-32x32.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f0d2c090"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Linux" href="linux-introduction.html" />
+    <link rel="prev" title="Running Zephyr on SiFive HiFive1" href="zephyr-hifive1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RISC-V - DevBoard Bringup Guide
+              <img src="_static/RISC-V-Logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BareMetal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="baremetal.html">BareMetal Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Zephyr</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="zephyr-introduction.html">Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-zephyr.html">Getting Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zephyr-qemu.html">Running Zephyr on QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zephyr-hifive1.html">Running Zephyr on SiFive HiFive1</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running Zephyr on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#building-your-system">Building your system</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#zephyr">Zephyr</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#building-a-shell-sample">Building a shell sample</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running">Running</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#preparing-the-platform">Preparing the platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-zephyr">Loading Zephyr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-zephyr">Running Zephyr</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux-introduction.html">Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-qemu.html">Running 64- and 32-bit RISC-V Linux on QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-hifive-u.html">Running 64-bit RISC-V Linux on SiFive HiFive Unleashed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-avalanche.html">Running 32-bit Linux on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RISC-V - DevBoard Bringup Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Running Zephyr on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/zephyr-litex.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-zephyr-on-litex-vexriscv-on-avalanche-board-with-microsemi-polarfire-fpga">
+<h1>Running Zephyr on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA<a class="headerlink" href="#running-zephyr-on-litex-vexriscv-on-avalanche-board-with-microsemi-polarfire-fpga" title="Link to this heading"></a></h1>
+<p>This section contains a tutorial on how to build and run a shell sample for the Zephyr RTOS on the LiteX soft SoC with an RV32 VexRiscv CPU on the <a class="reference external" href="https://www.microsemi.com/existing-parts/parts/139680">Future Electronics Avalanche Board</a> with a <a class="reference external" href="https://www.microsemi.com/product-directory/fpgas/3854-polarfire-fpgas">PolarFire FPGA</a> from Microsemi (a Microchip company) as well as in the <a class="reference external" href="https://renode.io">Renode open source simulation framework</a>.</p>
+<figure class="align-center" id="id1">
+<img alt="_images/avalanche.jpg" src="_images/avalanche.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">The Future Electronics Avalanche board - top.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="building-your-system">
+<h2>Building your system<a class="headerlink" href="#building-your-system" title="Link to this heading"></a></h2>
+<section id="zephyr">
+<h3>Zephyr<a class="headerlink" href="#zephyr" title="Link to this heading"></a></h3>
+<p>First, <a class="reference internal" href="getting-zephyr.html"><span class="doc">prepare your environment and get the Zephyr RTOS sources</span></a>.</p>
+<p>If you want to skip building Zephyr manually, you can download a precompiled <a class="reference external" href="https://antmicro.com/projects/renode/litex_vexriscv--zephyr-shell.elf-s_750684-21ab1a23b11ad242acd76f85621380e15b377173">ELF file</a> and <a class="reference external" href="https://antmicro.com/projects/renode/litex_vexriscv--zephyr-shell.bin-s_57912-448675102fa144363b4fb41336bdf02017c4090b">binary file</a>.</p>
+<section id="building-a-shell-sample">
+<h4>Building a shell sample<a class="headerlink" href="#building-a-shell-sample" title="Link to this heading"></a></h4>
+<p>Generate the project build files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">samples</span><span class="o">/</span><span class="n">subsys</span><span class="o">/</span><span class="n">shell</span><span class="o">/</span><span class="n">shell_module</span>
+<span class="n">mkdir</span> <span class="n">build</span>
+<span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">DBOARD</span><span class="o">=</span><span class="n">litex_vexriscv</span> <span class="o">..</span>
+</pre></div>
+</div>
+<p>Build it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>make -j $(nproc)
+</pre></div>
+</div>
+<p>As a result, you should find <code class="docutils literal notranslate"><span class="pre">zephyr.elf</span></code> and <code class="docutils literal notranslate"><span class="pre">zephyr.bin</span></code> in the <code class="docutils literal notranslate"><span class="pre">zephyr</span></code> folder.</p>
+</section>
+</section>
+</section>
+<section id="running">
+<h2>Running<a class="headerlink" href="#running" title="Link to this heading"></a></h2>
+<section id="preparing-the-platform">
+<h3>Preparing the platform<a class="headerlink" href="#preparing-the-platform" title="Link to this heading"></a></h3>
+</section>
+<section id="loading-zephyr">
+<h3>Loading Zephyr<a class="headerlink" href="#loading-zephyr" title="Link to this heading"></a></h3>
+</section>
+<section id="running-zephyr">
+<h3>Running Zephyr<a class="headerlink" href="#running-zephyr" title="Link to this heading"></a></h3>
+<p>Now you can use the UART window to interact with the shell, e.g.:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>uart:~$ help
+Please press the &lt;Tab&gt; button to see all available commands.
+You can also use the &lt;Tab&gt; button to prompt or auto-complete all commands or its subcommands.
+You can try to call commands with &lt;-h&gt; or &lt;--help&gt; parameter for more information.
+Shell supports following meta-keys:
+Ctrl+a, Ctrl+b, Ctrl+c, Ctrl+d, Ctrl+e, Ctrl+f, Ctrl+k, Ctrl+l, Ctrl+u, Ctrl+w
+Alt+b, Alt+f.
+Please refer to shell documentation for more details.
+
+uart:~$ kernel version
+Zephyr version 1.14.0
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="zephyr-hifive1.html" class="btn btn-neutral float-left" title="Running Zephyr on SiFive HiFive1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="linux-introduction.html" class="btn btn-neutral float-right" title="Linux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Antmicro, 2018-2020; RISC-V Foundation, 2019-2020, 2024.
+      <span class="lastupdated">Last updated on 2024-09-10.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+===============================================================================
+|project|
+===============================================================================
+
+.. toctree::
+   :caption: Introduction
+   :maxdepth: 2
+
+   introduction
+
+.. toctree::
+   :caption: BareMetal
+   :maxdepth: 1
+
+   baremetal
+
+.. toctree::
+   :caption: Zephyr
+   :maxdepth: 2
+
+   zephyr-introduction
+   getting-zephyr
+   zephyr-qemu
+   zephyr-hifive1
+   zephyr-litex
+
+.. toctree::
+   :caption: Linux
+   :maxdepth: 2
+
+   linux-introduction
+   linux-qemu
+   linux-hifive-u
+   linux-avalanche
+

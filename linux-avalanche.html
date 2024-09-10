@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running 32-bit Linux on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA &mdash; RISC-V - DevBoard Bringup Guide</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/risc-v.css?v=5d3f3da0" />
+      <link rel="stylesheet" type="text/css" href="_static/css/risc-v.css?v=5d3f3da0" />
+
+  
+    <link rel="shortcut icon" href="_static/riscv-favicon-32x32.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f0d2c090"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Running 64-bit RISC-V Linux on SiFive HiFive Unleashed" href="linux-hifive-u.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RISC-V - DevBoard Bringup Guide
+              <img src="_static/RISC-V-Logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BareMetal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="baremetal.html">BareMetal Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Zephyr</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="zephyr-introduction.html">Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-zephyr.html">Getting Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zephyr-qemu.html">Running Zephyr on QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zephyr-hifive1.html">Running Zephyr on SiFive HiFive1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zephyr-litex.html">Running Zephyr on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Linux</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="linux-introduction.html">Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-qemu.html">Running 64- and 32-bit RISC-V Linux on QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-hifive-u.html">Running 64-bit RISC-V Linux on SiFive HiFive Unleashed</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running 32-bit Linux on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-the-sources">Getting the sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running">Running</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#preparing-the-platform">Preparing the platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-linux-images">Loading Linux images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-linux">Running Linux</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RISC-V - DevBoard Bringup Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Running 32-bit Linux on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/linux-avalanche.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-32-bit-linux-on-litex-vexriscv-on-avalanche-board-with-microsemi-polarfire-fpga">
+<h1>Running 32-bit Linux on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA<a class="headerlink" href="#running-32-bit-linux-on-litex-vexriscv-on-avalanche-board-with-microsemi-polarfire-fpga" title="Link to this heading"></a></h1>
+<p>This section contains a tutorial on how to build and run 32-bit Linux on the LiteX soft SoC with an RV32 VexRiscv CPU on the <a class="reference external" href="https://www.microsemi.com/existing-parts/parts/139680">Future Electronics Avalanche Board</a> with a <a class="reference external" href="https://www.microsemi.com/product-directory/fpgas/3854-polarfire-fpgas">PolarFire FPGA</a> from Microsemi (a Microchip company) as well as in the <a class="reference external" href="https://renode.io">Renode open source simulation framework</a>.</p>
+<figure class="align-center" id="id1">
+<img alt="_images/avalanche.jpg" src="_images/avalanche.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">The Future Electronics Avalanche board - top.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This chapter targets Debian-based Linux flavors, and has been tested on Ubuntu 18.04.</p>
+</div>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>Running Linux on the Litex/VexRiscv platform requires you to install some prerequisites.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>autoconf<span class="w"> </span>automake<span class="w"> </span>autotools-dev<span class="w"> </span>bc<span class="w"> </span>bison<span class="w"> </span>build-essential<span class="w"> </span>curl<span class="w"> </span>cpio<span class="w"> </span>flex<span class="w"> </span><span class="se">\</span>
+<span class="w">                 </span>gawk<span class="w"> </span>gdisk<span class="w"> </span>git<span class="w"> </span>gperf<span class="w"> </span>libgmp-dev<span class="w"> </span>libmpc-dev<span class="w"> </span>libmpfr-dev<span class="w"> </span>libncurses-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">                 </span>libssl-dev<span class="w"> </span>libtool<span class="w"> </span>patchutils<span class="w"> </span>python<span class="w"> </span>rsync<span class="w"> </span>screen<span class="w"> </span>texinfo<span class="w"> </span>unzip<span class="w"> </span>zlib1g-dev
+</pre></div>
+</div>
+</section>
+<section id="getting-the-sources">
+<h2>Getting the sources<a class="headerlink" href="#getting-the-sources" title="Link to this heading"></a></h2>
+<p>Clone the official Buildroot repository and apply a <a class="reference download internal" download="" href="_downloads/06cddd631ab0cdc5b349d30d1152001b/0001-Add-Litex-VexRiscv-support.patch"><code class="xref download docutils literal notranslate"><span class="pre">patch</span> <span class="pre">adding</span> <span class="pre">VexRiscv</span> <span class="pre">support</span></code></a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/buildroot/buildroot
+<span class="nb">cd</span><span class="w"> </span>buildroot
+git<span class="w"> </span>checkout<span class="w"> </span>653bf9383721a2e2d3313ae08a3019b864326
+git<span class="w"> </span>am<span class="w"> </span>../../files/0001-Add-Litex-VexRiscv-support.patch
+</pre></div>
+</div>
+</section>
+<section id="building">
+<h2>Building<a class="headerlink" href="#building" title="Link to this heading"></a></h2>
+<p>Simply run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>~/vexriscv-bins
+make<span class="w"> </span>litex_vexriscv_defconfig
+make<span class="w"> </span>-j<span class="sb">`</span>nproc<span class="sb">`</span>
+cp<span class="w"> </span>output/images/Image<span class="w"> </span>output/images/rootfs.cpio<span class="w"> </span>~/vexriscv-bins
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build process may take some time, do not be discouraged by the wait. The resulting binaries (<code class="docutils literal notranslate"><span class="pre">rootfs.cpio</span></code> and <code class="docutils literal notranslate"><span class="pre">Image</span></code>) will be written in the <code class="docutils literal notranslate"><span class="pre">output/images</span></code> folder.</p>
+</div>
+</section>
+<section id="running">
+<h2>Running<a class="headerlink" href="#running" title="Link to this heading"></a></h2>
+<section id="preparing-the-platform">
+<h3>Preparing the platform<a class="headerlink" href="#preparing-the-platform" title="Link to this heading"></a></h3>
+</section>
+<section id="loading-linux-images">
+<h3>Loading Linux images<a class="headerlink" href="#loading-linux-images" title="Link to this heading"></a></h3>
+<p>First, download pre-built binaries of two files needed for running Linux on the platform, the Machine Mode emulator and the device tree:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/vexriscv-bins
+wget<span class="w"> </span>https://github.com/riscv/risc-v-getting-started-guide/releases/download/tip/devicetree-litex-vexriscv-avalanche-linux.dtb
+wget<span class="w"> </span>https://github.com/riscv/risc-v-getting-started-guide/releases/download/tip/emulator-litex-vexriscv-avalanche-linux.bin
+</pre></div>
+</div>
+</section>
+<section id="running-linux">
+<h3>Running Linux<a class="headerlink" href="#running-linux" title="Link to this heading"></a></h3>
+<p>Now you should see the following log of booting Linux:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>VexRiscv Machine Mode software built May 13 2019 14:14:12
+--========== Booting Linux =============--
+[    0.000000] No DTB passed to the kernel
+[    0.000000] Linux version 5.0.14 (user@host) (gcc version 8.3.0 (Buildroot 2019.05-rc1-00022-g653bf93)) #1 Mon May 13 10:22:15 CEST 2019
+[    0.000000] Initial ramdisk at: 0x(ptrval) (8388608 bytes)
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x00000000c0000000-0x00000000c7ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x00000000c0000000-0x00000000c7ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x00000000c0000000-0x00000000c7ffffff]
+[    0.000000] elf_hwcap is 0x1101
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32512
+[    0.000000] Kernel command line: mem=128M@0x40000000 rootwait console=hvc0 root=/dev/ram0 init=/sbin/init swiotlb=32
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.000000] Sorting __ex_table...
+[    0.000000] Memory: 119052K/131072K available (1958K kernel code, 90K rwdata, 317K rodata, 104K init, 184K bss, 12020K reserved, 0K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 0, nr_irqs: 0, preallocated irqs: 0
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x114c1bade8, max_idle_ns: 440795203839 ns
+[    0.000751] sched_clock: 64 bits at 75MHz, resolution 13ns, wraps every 2199023255546ns
+[    0.006686] Console: colour dummy device 80x25
+[    0.205255] printk: console [hvc0] enabled
+[    0.213843] Calibrating delay loop (skipped), value calculated using timer frequency.. 150.00 BogoMIPS (lpj=300000)
+[    0.230054] pid_max: default: 32768 minimum: 301
+[    0.289177] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.300773] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.562839] devtmpfs: initialized
+[    0.777903] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.793367] futex hash table entries: 256 (order: -1, 3072 bytes)
+[    1.514347] clocksource: Switched to clocksource riscv_clocksource
+[    2.964577] Unpacking initramfs...
+[   11.940415] Initramfs unpacking failed: junk in compressed archive
+[   12.049860] workingset: timestamp_bits=30 max_order=15 bucket_order=0
+[   13.575690] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 254)
+[   13.588037] io scheduler mq-deadline registered
+[   13.593169] io scheduler kyber registered
+[   22.876345] random: get_random_bytes called from init_oops_id+0x4c/0x60 with crng_init=0
+[   23.017785] Freeing unused kernel memory: 104K
+[   23.025710] This architecture does not have kernel memory protection.
+[   23.036765] Run /init as init process
+mount: mounting tmpfs on /dev/shm failed: Invalid argument
+mount: mounting tmpfs on /tmp failed: Invalid argument
+mount: mounting tmpfs on /run failed: Invalid argument
+Starting syslogd: OK
+Starting klogd: OK
+Initializing random number generator... [   36.389928] random: dd: uninitialized urandom read (512 bytes read)
+done.
+Starting network: ip: socket: Function not implemented
+ip: socket: Function not implemented
+FAIL
+
+Welcome to Buildroot
+buildroot login: root
+
+   __   _                                  __   _ __      _  __   _   __         ___  _
+     / /  (_)__  __ ____ _________  ___  ____/ /  (_) /____ | |/_/__| | / /____ __ / _ \(_)__ _____  __
+    / /__/ / _ \/ // /\ \ /___/ _ \/ _ \/___/ /__/ / __/ -_)&gt;  &lt;/___/ |/ / -_) \ // , _/ (_-&lt;/ __/ |/ /
+   /____/_/_//_/\_,_//_\_\    \___/_//_/   /____/_/\__/\__/_/|_|    |___/\__/_\_\/_/|_/_/___/\__/|___/
+
+                          32-bits VexRiscv CPU with MMU integrated in a LiteX SoC
+
+login[48]: root login on &#39;hvc0&#39;
+root@buildroot:~#
+</pre></div>
+</div>
+<p>The default Linux credentials are:</p>
+<dl class="simple">
+<dt>username</dt><dd><p>root</p>
+</dd>
+<dt>password</dt><dd><p>(no pass)</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="linux-hifive-u.html" class="btn btn-neutral float-left" title="Running 64-bit RISC-V Linux on SiFive HiFive Unleashed" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Antmicro, 2018-2020; RISC-V Foundation, 2019-2020, 2024.
+      <span class="lastupdated">Last updated on 2024-09-10.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

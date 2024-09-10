@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BareMetal Application &mdash; RISC-V - DevBoard Bringup Guide</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/risc-v.css?v=5d3f3da0" />
+      <link rel="stylesheet" type="text/css" href="_static/css/risc-v.css?v=5d3f3da0" />
+
+  
+    <link rel="shortcut icon" href="_static/riscv-favicon-32x32.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f0d2c090"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Zephyr" href="zephyr-introduction.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RISC-V - DevBoard Bringup Guide
+              <img src="_static/RISC-V-Logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BareMetal</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BareMetal Application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-the-environment">Setting up the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-the-sources">Getting the sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-baremetal-application">Building the baremetal application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-baremetal-application">Running the baremetal application</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Zephyr</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="zephyr-introduction.html">Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-zephyr.html">Getting Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zephyr-qemu.html">Running Zephyr on QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zephyr-hifive1.html">Running Zephyr on SiFive HiFive1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zephyr-litex.html">Running Zephyr on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux-introduction.html">Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-qemu.html">Running 64- and 32-bit RISC-V Linux on QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-hifive-u.html">Running 64-bit RISC-V Linux on SiFive HiFive Unleashed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-avalanche.html">Running 32-bit Linux on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RISC-V - DevBoard Bringup Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">BareMetal Application</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/baremetal.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="baremetal-application">
+<h1>BareMetal Application<a class="headerlink" href="#baremetal-application" title="Link to this heading"></a></h1>
+<p>This example provides a minimal bare metal demo app that demonstrates how to easily create a bare metal C application
+and load it/run it on the riscv soc from  RaspberryPi <a class="reference external" href="https://raspberrypi.com/products/rp2350/">RP2350</a>.</p>
+<p>Here, we will focus on a printing simple string over serial console for simplicity and clarity.</p>
+<section id="setting-up-the-environment">
+<h2>Setting up the environment<a class="headerlink" href="#setting-up-the-environment" title="Link to this heading"></a></h2>
+<p>Please remember to set up pico-sdk and picotool alongwith and riscv toolchain first.
+The sdk and tools for rp2350 are installed in ~/.pico-sdk/ with <a class="reference external" href="https://github.com/raspberrypi/pico-vscode/">VSCode Plugin</a>.
+It can also be installed with prebuilt binaries present at <a class="reference external" href="https://github.com/raspberrypi/pico-sdk-tools/releases/tag/v2.0.0-2">pico-sdk-tools</a>.
+To use the tools and sdk installed to another location set the following :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PICO_SDK_PATH</span><span class="o">=~/</span><span class="n">example_sdk</span><span class="o">/</span><span class="n">sdk</span><span class="o">/</span><span class="mf">2.0.0</span><span class="o">/</span>
+<span class="n">export</span> <span class="n">PICO_TOOLCHAIN_PATH</span><span class="o">=~/</span><span class="n">example_sdk</span><span class="o">/</span><span class="n">toolchain</span><span class="o">/</span><span class="mi">13_2</span><span class="n">_Rel1</span>
+<span class="n">export</span> <span class="n">picotool_DIR</span><span class="o">=~/</span><span class="n">example_sdk</span><span class="o">/</span><span class="n">picotool</span><span class="o">/</span><span class="mf">2.0.0</span><span class="o">/</span><span class="n">picotool</span>
+</pre></div>
+</div>
+</section>
+<section id="getting-the-sources">
+<h2>Getting the sources<a class="headerlink" href="#getting-the-sources" title="Link to this heading"></a></h2>
+<p>Clone the baremetal application repository.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">disdi</span><span class="o">/</span><span class="n">bare</span><span class="o">-</span><span class="n">metal</span><span class="o">-</span><span class="n">riscv</span>
+<span class="n">cd</span> <span class="n">bare</span><span class="o">-</span><span class="n">metal</span><span class="o">-</span><span class="n">riscv</span>
+</pre></div>
+</div>
+</section>
+<section id="building-the-baremetal-application">
+<h2>Building the baremetal application<a class="headerlink" href="#building-the-baremetal-application" title="Link to this heading"></a></h2>
+<p>Execute the below commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">PICO_BOARD</span><span class="o">=</span><span class="n">sparkfun_promicro_rp2350</span> <span class="n">PICO_SDK_PATH</span><span class="o">=~/.</span><span class="n">pico</span><span class="o">-</span><span class="n">sdk</span><span class="o">/</span>  <span class="n">build</span>
+<span class="n">make</span> <span class="n">flash</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The resulting binaries (<code class="docutils literal notranslate"><span class="pre">print.uf2</span></code>) will be written in the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder. Transfer this binary file to the Pico board with a micro USB cable and holding down the BOOTSEL button.</p>
+</div>
+</section>
+<section id="running-the-baremetal-application">
+<h2>Running the baremetal application<a class="headerlink" href="#running-the-baremetal-application" title="Link to this heading"></a></h2>
+<p>To run baremetal application, connect a bi-directional logic level converter set at 3.3V between development machine and Pico with TX, RX and GND.</p>
+<p><strong>RISC-V from RPI</strong> should be seen on ttyUSB serial terminal.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="zephyr-introduction.html" class="btn btn-neutral float-right" title="Zephyr" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Antmicro, 2018-2020; RISC-V Foundation, 2019-2020, 2024.
+      <span class="lastupdated">Last updated on 2024-09-10.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

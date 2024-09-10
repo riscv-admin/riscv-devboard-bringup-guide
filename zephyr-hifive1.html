@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running Zephyr on SiFive HiFive1 &mdash; RISC-V - DevBoard Bringup Guide</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/risc-v.css?v=5d3f3da0" />
+      <link rel="stylesheet" type="text/css" href="_static/css/risc-v.css?v=5d3f3da0" />
+
+  
+    <link rel="shortcut icon" href="_static/riscv-favicon-32x32.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f0d2c090"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Running Zephyr on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA" href="zephyr-litex.html" />
+    <link rel="prev" title="Running Zephyr on QEMU" href="zephyr-qemu.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RISC-V - DevBoard Bringup Guide
+              <img src="_static/RISC-V-Logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BareMetal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="baremetal.html">BareMetal Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Zephyr</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="zephyr-introduction.html">Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-zephyr.html">Getting Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zephyr-qemu.html">Running Zephyr on QEMU</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running Zephyr on SiFive HiFive1</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-the-enviroment">Setting up the enviroment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-tools-for-hifive1-board">Getting tools for HiFive1 board</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compiling-an-example">Compiling an example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flashing">Flashing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zephyr-litex.html">Running Zephyr on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Linux</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux-introduction.html">Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-qemu.html">Running 64- and 32-bit RISC-V Linux on QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-hifive-u.html">Running 64-bit RISC-V Linux on SiFive HiFive Unleashed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-avalanche.html">Running 32-bit Linux on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RISC-V - DevBoard Bringup Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Running Zephyr on SiFive HiFive1</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/zephyr-hifive1.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-zephyr-on-sifive-hifive1">
+<h1>Running Zephyr on SiFive HiFive1<a class="headerlink" href="#running-zephyr-on-sifive-hifive1" title="Link to this heading"></a></h1>
+<p>SiFive’s <a class="reference external" href="https://www.sifive.com/products/hifive1/">HiFive1</a> is an Arduino-Compatible development kit featuring the Freedom E310, the industry’s first commercially available RISC-V SoC.</p>
+<p>It’s a very good starting point if you want to get Zephyr running on a physical chip/board.
+SiFive provides open source schematics, an Altium Designer PCB project, BOM, and - of course - tooling for the HiFive1.</p>
+<figure class="align-center" id="id1">
+<img alt="_images/hifive1.jpg" src="_images/hifive1.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">The HiFive1 board - top.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="setting-up-the-enviroment">
+<h2>Setting up the enviroment<a class="headerlink" href="#setting-up-the-enviroment" title="Link to this heading"></a></h2>
+<p>Please remember to <a class="reference internal" href="getting-zephyr.html"><span class="doc">get the sources and setup the environment</span></a> first.</p>
+</section>
+<section id="getting-tools-for-hifive1-board">
+<h2>Getting tools for HiFive1 board<a class="headerlink" href="#getting-tools-for-hifive1-board" title="Link to this heading"></a></h2>
+<p>Download and extract a prebuilt OpenOCD and GDB with RISC-V from SiFive’s website:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># GDB</span>
+wget<span class="w"> </span>https://static.dev.sifive.com/dev-tools/riscv64-unknown-elf-gcc-2018.07.0-x86_64-linux-ubuntu14.tar.gz
+tar<span class="w"> </span>xzfv<span class="w"> </span>riscv64-unknown-elf-gcc-2018.07.0-x86_64-linux-ubuntu14.tar.gz
+
+<span class="c1"># OpenOCD</span>
+wget<span class="w"> </span>https://static.dev.sifive.com/dev-tools/riscv-openocd-2018.7.0-x86_64-linux-ubuntu14.tar.gz
+tar<span class="w"> </span>xzfv<span class="w"> </span>riscv-openocd-2018.7.0-x86_64-linux-ubuntu14.tar.gz
+</pre></div>
+</div>
+<p>SiFive provides an open source SDK for their Freedom E platform.</p>
+<p>Download Freedom E SDK and move previously downloaded prebuilt tools to their respective directories:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/sifive/freedom-e-sdk
+mv<span class="w"> </span>riscv64-unknown-elf-gcc-2018.07.0-x86_64-linux-ubuntu14/*<span class="w"> </span>freedom-e-sdk/riscv-gnu-toolchain
+mv<span class="w"> </span>riscv-openocd-2018.7.0-x86_64-linux-ubuntu14/*<span class="w"> </span>freedom-e-sdk/openocd
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you wish to build the toolchain yourself, please refer to <a class="reference external" href="https://github.com/sifive/freedom-e-sdk/blob/master/README.md">the instructions on SiFive’s GitHub</a>.</p>
+</div>
+</section>
+<section id="compiling-an-example">
+<h2>Compiling an example<a class="headerlink" href="#compiling-an-example" title="Link to this heading"></a></h2>
+<p>Create a build directory (we will use <code class="docutils literal notranslate"><span class="pre">build-example</span></code> here) and compile an example binary inside it with the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build-example
+<span class="nb">cd</span><span class="w"> </span>build-example
+cmake<span class="w"> </span>-DBOARD<span class="o">=</span>hifive1<span class="w"> </span><span class="nv">$ZEPHYR_BASE</span>/samples/hello_world
+make<span class="w"> </span>-j<span class="w"> </span><span class="k">$(</span>nproc<span class="k">)</span>
+<span class="nb">cd</span><span class="w"> </span>..
+</pre></div>
+</div>
+</section>
+<section id="flashing">
+<h2>Flashing<a class="headerlink" href="#flashing" title="Link to this heading"></a></h2>
+<p>Move to your Freedom E SDK directory and connect to the board with OpenOCD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>freedom-e-sdk
+sudo<span class="w"> </span>openocd/bin/openocd<span class="w"> </span>-f<span class="w"> </span>bsp/env/freedom-e300-hifive1/openocd.cfg
+</pre></div>
+</div>
+<p>Leave OpenOCD running and connect to the board with GDB, disable flash protection and load the binary (assuming it’s in the <code class="docutils literal notranslate"><span class="pre">build-example</span></code> directory you’ve created earlier):</p>
+<p>Finally, you can connect with picocom to the serial console:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>picocom<span class="w"> </span>-b<span class="w"> </span><span class="m">115200</span><span class="w"> </span>/dev/ttyUSBx<span class="w">  </span><span class="c1"># substitute &quot;x&quot; with appropriate port number</span>
+</pre></div>
+</div>
+<p>After resetting the board, a hello world message should appear.
+You can quit picocom using the <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">C</kbd>-<kbd class="kbd docutils literal notranslate">a</kbd></kbd> <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">C</kbd>-<kbd class="kbd docutils literal notranslate">q</kbd></kbd> key strokes.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="zephyr-qemu.html" class="btn btn-neutral float-left" title="Running Zephyr on QEMU" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="zephyr-litex.html" class="btn btn-neutral float-right" title="Running Zephyr on LiteX/VexRiscv on Avalanche board with Microsemi PolarFire FPGA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Antmicro, 2018-2020; RISC-V Foundation, 2019-2020, 2024.
+      <span class="lastupdated">Last updated on 2024-09-10.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
